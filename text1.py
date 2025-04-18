@@ -192,10 +192,10 @@ with st.form("scl90_form"):
                 
                 if all(r == 1 for r in responses):
                     cluster = 0 
-                    st.info("检测到全1输入，自动分类为健康状态")
+                    st.info("您的心理健康状况良好")
                 elif all(r == 5 for r in responses):
                     cluster = 2  
-                    st.info("检测到全5输入，自动分类为严重状态")
+                    st.info("建议寻求专业心理帮助")
                 else:
                     # 原有分类逻辑
                     scaled = scaler.transform(np.array(factor_scores).reshape(1, -1))
