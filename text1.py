@@ -243,6 +243,7 @@ with st.form("scl90_form"):
                 
                 st.plotly_chart(fig)
                 
+
                 # 显示因子得分表格
                 st.subheader("各因子得分详情")
 
@@ -260,21 +261,23 @@ with st.form("scl90_form"):
                 df_factors = pd.DataFrame(factor_data)
 
                 # 定义颜色函数
-                def color_high_values(val):
+                def color_values(val):
                     try:
                         score = float(val)
-                        if score > 2.5:
+                        if score > 2.5:  # 严重情况
                             return 'color: red; font-weight: bold'
+                        elif score >= 1.5:  # 轻度不适
+                            return 'color: #FFA500; font-weight: bold'  # 橙色
                     except:
                         pass
                     return ''
 
                 # 应用样式
-                styled_df = df_factors.style.applymap(color_high_values, subset=['平均得分'])
+                styled_df = df_factors.style.applymap(color_values, subset=['平均得分'])
 
                 # 显示表格
                 st.dataframe(styled_df)
-                
+                                
                
                 st.subheader("个性化建议")
                 
